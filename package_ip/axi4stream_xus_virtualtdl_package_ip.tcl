@@ -46,7 +46,7 @@ set_property supported_families $supported_families [ipx::current_core]
 # ========================== Import TCL Functions ==============================
 set path [pwd]
 regsub -all {(.)/logs} $path {\1} path
-append path "/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl/package_ip"
+append path "/Repositories/2020.2/XUS/ip_user_files/axi4stream_xus_virtualtdl/package_ip"
 
 
 # ==============================================================================
