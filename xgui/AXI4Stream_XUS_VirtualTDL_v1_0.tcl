@@ -1,14 +1,6 @@
 # Definitional proc to organize widgets for parameters.
 proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "Component_Name"
-  #Adding Page
-  set Page_0 [ipgui::add_page $IPINST -name "Page 0"]
-  ipgui::add_param $IPINST -name "CO_DELAY" -parent ${Page_0}
-  ipgui::add_param $IPINST -name "NUM_TAP_PRE_TDL" -parent ${Page_0}
-  ipgui::add_param $IPINST -name "NUM_TAP_TDL" -parent ${Page_0}
-  ipgui::add_param $IPINST -name "O_DELAY" -parent ${Page_0}
-  ipgui::add_param $IPINST -name "SIM_VS_IMP" -parent ${Page_0}
-
 
 }
 
