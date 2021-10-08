@@ -12,16 +12,16 @@ set_property vendor $vendor [ipx::current_core]
 set library "ip"
 set_property library $library [ipx::current_core]
 
-set name "AXI4Stream_X7S_VirtualTDL"
+set name "AXI4Stream_XUS_VirtualTDL"
 set_property name $name [ipx::current_core]
 
-set version "2.3"
+set version "1.0"
 set_property version $version [ipx::current_core]
 
-set display_name "AXI4-Stream Xilinx 7-Series V-TDL"
+set display_name "AXI4-Stream Xilinx UltraSCALE V-TDL"
 set_property display_name $display_name [ipx::current_core]
 
-set description "Virtual Tapped Delay-Line with AXI4-Stram interface for the TDC"
+set description "Virtual Tapped Delay-Line with AXI4-Stram interface for the TDC (UltraSCALE)"
 set_property description $description [ipx::current_core]
 
 set vendor_display_name {DigiLAB}
