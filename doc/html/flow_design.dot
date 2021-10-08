@@ -1,0 +1,15 @@
+ digraph G { 
+rankdir=TB 
+concentrate=true
+stylesheet="doxygen.css"
+node5[shape=box , style=rounded label=<
+<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0" >
+ <TR><TD BGCOLOR="white"> reset_process:process( ) </TD></TR></TABLE>>];node1[shape=none margin=0.1, label=<
+<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="2" >
+ <TR><TD BGCOLOR="lightcyan" > reset&lt;= &#39;1&#39;<BR ALIGN="LEFT"/> wait  for  10*   CLK_PERIOD<BR ALIGN="LEFT"/>reset&lt;= &#39;0&#39;<BR ALIGN="LEFT"/> wait                                             . </TD></TR></TABLE>>];node6[shape=box , style=rounded label=<
+<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0" >
+ <TR><TD BGCOLOR="white"> end process  </TD></TR></TABLE>>];edge [color="green",label=""]
+node5->node1
+edge [color="green",label=""]
+node1->node6
+ } 

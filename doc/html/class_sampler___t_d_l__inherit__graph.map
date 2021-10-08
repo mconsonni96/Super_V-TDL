@@ -1,0 +1,6 @@
+<map id="Sampler_TDL" name="Sampler_TDL">
+<area shape="rect" id="node1" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_..." alt="" coords="170,5,278,32"/>
+<area shape="rect" id="node2" href="$class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu..." alt="" coords="93,80,355,107"/>
+<area shape="rect" id="node3" href="$class_a_x_i4_stream___x_u_s___virtual_t_d_l.html" title="The entity of this module can be described by the following images:" alt="" coords="5,162,213,189"/>
+<area shape="rect" id="node4" href="$classtb___a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title=" " alt="" coords="237,155,440,196"/>
+</map>

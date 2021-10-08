@@ -1,0 +1,6 @@
+<map id="AXI4Stream_XUS_VirtualTDLWrapper" name="AXI4Stream_XUS_VirtualTDLWrapper">
+<area shape="rect" id="node1" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu..." alt="" coords="57,169,320,196"/>
+<area shape="rect" id="node2" href="$class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ..." alt="" coords="25,80,192,121"/>
+<area shape="rect" id="node3" href="$class_simulated___tapped_delay_line.html" title="Being a module used just in simulation phase, we need to have CO_DELAY and O_DELAY that are the value..." alt="" coords="5,5,212,32"/>
+<area shape="rect" id="node4" href="$class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_..." alt="" coords="216,87,324,114"/>
+</map>

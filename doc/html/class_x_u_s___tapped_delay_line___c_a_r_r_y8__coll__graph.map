@@ -1,0 +1,4 @@
+<map id="XUS_TappedDelayLine_CARRY8" name="XUS_TappedDelayLine_CARRY8">
+<area shape="rect" id="node1" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ..." alt="" coords="25,80,192,121"/>
+<area shape="rect" id="node2" href="$class_simulated___tapped_delay_line.html" title="Being a module used just in simulation phase, we need to have CO_DELAY and O_DELAY that are the value..." alt="" coords="5,5,212,32"/>
+</map>
