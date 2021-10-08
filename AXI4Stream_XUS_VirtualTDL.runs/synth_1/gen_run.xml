@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1633013291">
-  <File Type="VDS-TIMING-PB" Name="AXI4Stream_XUS_VirtualTDL_timing_summary_synth.pb"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="AXI4Stream_XUS_VirtualTDL_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="AXI4Stream_XUS_VirtualTDL.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="AXI4Stream_XUS_VirtualTDL_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="AXI4Stream_XUS_VirtualTDL_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="AXI4Stream_XUS_VirtualTDL_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="AXI4Stream_XUS_VirtualTDL.vds"/>
   <File Type="REPORTS-TCL" Name="AXI4Stream_XUS_VirtualTDL_reports.tcl"/>
   <File Type="PA-TCL" Name="AXI4Stream_XUS_VirtualTDL.tcl"/>
+  <File Type="RDS-DCP" Name="AXI4Stream_XUS_VirtualTDL.dcp"/>
+  <File Type="RDS-RDS" Name="AXI4Stream_XUS_VirtualTDL.vds"/>
+  <File Type="RDS-UTIL" Name="AXI4Stream_XUS_VirtualTDL_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="AXI4Stream_XUS_VirtualTDL_utilization_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/LocalPackage_TDL.vhd">
@@ -60,9 +57,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>
