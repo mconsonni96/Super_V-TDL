@@ -8,6 +8,8 @@ for {set i 0} {$i < 16} {incr i} {
 	set offset_tap_i "OFFSET_TAP_TDL_"
 	append offset_tap_i $i
 
+	ipgui::add_param -name $offset_tap_i -component [ipx::current_core] -display_name $display_name -show_label {true} -show_range {true} -widget {}
+
 	set_property value_validation_type range_long [ipx::get_user_parameters $offset_tap_i -of_objects [ipx::current_core]]
 	set_property value_validation_range_minimum 0 [ipx::get_user_parameters $offset_tap_i -of_objects [ipx::current_core]]
 	set_property value_validation_range_maximum 2047 [ipx::get_user_parameters $offset_tap_i -of_objects [ipx::current_core]]
@@ -41,7 +43,6 @@ for {set i 0} {$i < 16} {incr i} {
 	set tooltip "Offset Between consecutive Sampled Taps over the TDL $i"
 	set display_name "Offset Sampled Taps TDL $i"
 
-	ipgui::add_param -name $offset_tap_i -component [ipx::current_core] -display_name $display_name -show_label {true} -show_range {true} -widget {}
 	set_param_long_range $offset_tap_i $MIN_OFFSET_TAP_TDL $MAX_OFFSET_TAP_TDL $DEFAULT_OFFSET_TAP_TDL $enablement $editable $dependency $tooltip $display_name
 
 }
