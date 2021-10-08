@@ -2,6 +2,8 @@
 # BUFFERING_STAGE	:	BOOLEAN	:= TRUE;
 
 # ------------- BUFFERING_STAGE ----------
+set name "BUFFERING_STAGE"
+
 set DEFAULT_BUFFERING_STAGE "FALSE"
 
 set enablement {True}
@@ -12,5 +14,6 @@ set dependency {}
 set tooltip "Insertion of a further buffering stage between TDL and decoder for bufferazing the generation of the valid"
 set display_name "Buffering Stage inside TDL"
 
-set_param_bool "BUFFERING_STAGE" $DEFAULT_BUFFERING_STAGE $enablement $editable $dependency $tooltip $display_name
+ipgui::add_param -name $name -component [ipx::current_core] -display_name $display_name -show_label {true} -show_range {true} -widget {}
+set_param_bool $name $DEFAULT_BUFFERING_STAGE $enablement $editable $dependency $tooltip $display_name
 # ----------------------------------------------

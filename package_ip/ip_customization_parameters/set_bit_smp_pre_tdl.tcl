@@ -2,6 +2,8 @@
 # BIT_SMP_PRE_TDL			:	POSITIVE	RANGE 1 TO 4096	:= 5
 
 # ---------------- BIT_SMP_PRE_TDL -----------------
+set name "BIT_SMP_PRE_TDL"
+
 set MIN_BIT_SMP_PRE_TDL 0
 # set MAX_BIT_SMP_PRE_TDL 4096
 #set DEFAULT_BIT_SMP_PRE_TDL 256
@@ -17,5 +19,7 @@ set dependency {}
 set tooltip "Number of taps sampled on the PRE-TDL"
 set display_name "Taps Sampled of the PRE-TDL"
 
-set_param_long_range "BIT_SMP_PRE_TDL" $MIN_BIT_SMP_PRE_TDL $MAX_BIT_SMP_PRE_TDL $DEFAULT_BIT_SMP_PRE_TDL $enablement $editable $dependency $tooltip $display_name
+
+ipgui::add_param -name $name -component [ipx::current_core] -display_name $display_name -show_label {true} -show_range {true} -widget {}
+set_param_long_range $name $MIN_BIT_SMP_PRE_TDL $MAX_BIT_SMP_PRE_TDL $DEFAULT_BIT_SMP_PRE_TDL $enablement $editable $dependency $tooltip $display_name
 # ----------------------------------------------

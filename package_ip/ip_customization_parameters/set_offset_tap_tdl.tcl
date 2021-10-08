@@ -41,6 +41,7 @@ for {set i 0} {$i < 16} {incr i} {
 	set tooltip "Offset Between consecutive Sampled Taps over the TDL $i"
 	set display_name "Offset Sampled Taps TDL $i"
 
+	ipgui::add_param -name $offset_tap_i -component [ipx::current_core] -display_name $display_name -show_label {true} -show_range {true} -widget {}
 	set_param_long_range $offset_tap_i $MIN_OFFSET_TAP_TDL $MAX_OFFSET_TAP_TDL $DEFAULT_OFFSET_TAP_TDL $enablement $editable $dependency $tooltip $display_name
 
 }

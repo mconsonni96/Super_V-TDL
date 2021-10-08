@@ -1,6 +1,6 @@
 
 # =========================== SET PATH =========================================
-set path "D:/Xilinx_bis/Utility_Ip_Core/ip_repo/axi4stream_x7s_virtualtdl/package_ip"
+set path "/home/utility_ip_core/ip-rep/axi4stream_xus_virtualtdl/package_ip"
 # ==============================================================================
 
 
@@ -44,9 +44,11 @@ set_property supported_families $supported_families [ipx::current_core]
 
 
 # ========================== Import TCL Functions ==============================
-#set path [pwd]
-#regsub -all {(.)/logs} $path {\1} path
-#append path "/Utility_Ip_Core/ip_repo/TDC_Basic/AXI4Stream_X7S_VirtualTDL/package_ip"
+set path [pwd]
+regsub -all {(.)/logs} $path {\1} path
+append path "/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl/package_ip"
+
+
 # ==============================================================================
 
 # ====================== SET IP CUSTOMIZATION PARAMIETR ========================

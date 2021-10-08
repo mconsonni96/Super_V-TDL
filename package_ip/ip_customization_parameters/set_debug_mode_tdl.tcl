@@ -2,6 +2,8 @@
 # DEBUG_MODE		:	BOOLEAN	:=	TRUE;
 
 # ------------- DEBUG_MODE -------------
+set name "DEBUG_MODE"
+
 set DEFAULT_DEBUG_MODE "FALSE"
 
 set enablement {True}
@@ -12,5 +14,6 @@ set dependency {}
 set tooltip "Allow to tune in real-time the valid position for its generation"
 set display_name "Debug Port V-TDL"
 
-set_param_bool "DEBUG_MODE" $DEFAULT_DEBUG_MODE $enablement $editable $dependency $tooltip $display_name
+ipgui::add_param -name $name -component [ipx::current_core] -display_name $display_name -show_label {true} -show_range {true} -widget {}
+set_param_bool $name $DEFAULT_DEBUG_MODE $enablement $editable $dependency $tooltip $display_name
 # ----------------------------------------------
