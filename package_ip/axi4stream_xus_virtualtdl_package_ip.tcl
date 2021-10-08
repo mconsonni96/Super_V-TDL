@@ -35,6 +35,13 @@ set_property taxonomy $taxonomy [ipx::current_core]
 # ==============================================================================
 
 
+# ============================ Compatibility  ==================================
+set supported_families {kintexu Beta kintexuplus Beta virtexu Beta virtexuplus Beta virtexuplus58g Beta virtexuplusHBM Beta zynquplus Beta}
+
+set_property supported_families {} [ipx::current_core]
+set_property supported_families $supported_families [ipx::current_core]
+# ==============================================================================
+
 
 # ========================== Import TCL Functions ==============================
 #set path [pwd]

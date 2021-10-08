@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <spirit:vendor>user.org</spirit:vendor>
-  <spirit:library>user</spirit:library>
-  <spirit:name>XUS_TappedDelayLine_CARRY8</spirit:name>
+  <spirit:vendor>DigiLAB</spirit:vendor>
+  <spirit:library>ip</spirit:library>
+  <spirit:name>AXI4Stream_XUS_VirtualTDL</spirit:name>
   <spirit:version>1.0</spirit:version>
   <spirit:model>
     <spirit:views>
@@ -245,7 +245,7 @@
     <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>xgui/XUS_TappedDelayLine_CARRY8_v1_0.tcl</spirit:name>
+        <spirit:name>xgui/AXI4Stream_XUS_VirtualTDL_v1_0.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
         <spirit:userFileType>CHECKSUM_ba727f56</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
@@ -1594,7 +1594,7 @@
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
-  <spirit:description>XUS_TappedDelayLine_CARRY8_v1_0</spirit:description>
+  <spirit:description>Virtual Tapped Delay-Line with AXI4-Stram interface for the TDC (UltraSCALE)</spirit:description>
   <spirit:parameters>
     <spirit:parameter>
       <spirit:name>SIM_VS_IMP</spirit:name>
@@ -1629,40 +1629,42 @@
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
       <xilinx:supportedFamilies>
-        <xilinx:family xilinx:lifeCycle="Production">virtex7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">qvirtex7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">versal</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">kintex7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">kintex7l</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">qkintex7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">qkintex7l</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">akintex7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">artix7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">artix7l</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">aartix7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">qartix7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">zynq</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">qzynq</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">azynq</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">spartan7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">aspartan7</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">virtexu</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">zynquplus</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">virtexuplus</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">virtexuplusHBM</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">virtexuplus58g</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">kintexuplus</xilinx:family>
-        <xilinx:family xilinx:lifeCycle="Production">kintexu</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Beta">kintexu</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Beta">kintexuplus</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Beta">virtexu</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Beta">virtexuplus</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Beta">virtexuplus58g</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Beta">virtexuplusHBM</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Beta">zynquplus</xilinx:family>
       </xilinx:supportedFamilies>
       <xilinx:taxonomies>
-        <xilinx:taxonomy>/UserIP</xilinx:taxonomy>
+        <xilinx:taxonomy>/TDC_Basic</xilinx:taxonomy>
       </xilinx:taxonomies>
-      <xilinx:displayName>XUS_TappedDelayLine_CARRY8_v1_0</xilinx:displayName>
+      <xilinx:displayName>AXI4-Stream Xilinx UltraSCALE V-TDL</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
+      <xilinx:vendorDisplayName>DigiLAB</xilinx:vendorDisplayName>
       <xilinx:coreRevision>1</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2021-10-08T10:27:45Z</xilinx:coreCreationDateTime>
+      <xilinx:upgrades>
+        <xilinx:canUpgradeFrom>user.org:user:XUS_TappedDelayLine_CARRY8:1.0</xilinx:canUpgradeFrom>
+      </xilinx:upgrades>
+      <xilinx:coreCreationDateTime>2021-10-08T10:50:04Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="nopcore"/>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7282cc23_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3ff23555_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@715dd4e9_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@39d6e388_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@70bd39b0_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7bab714a_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@768e0dfb_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@27ec9283_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7e201d44_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3d4aecdc_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5640af02_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1bdbb603_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@35b1d2b0_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7307faab_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e9d992f_ARCHIVE_LOCATION">/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
