@@ -88,7 +88,7 @@ package LocalPackage_TDL is
 
 
     -- Technology node of the TDL ------------------------
-	subtype XUS_VS_X7S_STRING is string(1 TO 3);                                                            --! Technology node of the TDL i.e. UltraScale(+) or Xilinx 7-Series
+	--subtype XUS_VS_X7S_STRING is string(1 TO 3);                                                            --! Technology node of the TDL i.e. UltraScale(+) or Xilinx 7-Series
 
 	-- Type of TDL in CARRY8(4) for Xilinx UltraScale (7-Series)
 	subtype CO_VS_O_STRING is string(1 TO 1);																--! Type of TDL in CARRY8(4) for Xilinx UltraScale (7-Series)

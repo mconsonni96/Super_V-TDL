@@ -104,7 +104,7 @@ entity AXI4Stream_XUS_VirtualTDL is
 
 	generic (
         ------------- Select Technology node of the Tapped Delay-Line
-        XUS_VS_X7S          :   XUS_VS_X7S_STRING  := "XUS";
+        XUS_VS_X7S          :   STRING  := "XUS";
 
 		------------- Select Types of Edge of the Tapped Delay-Line ------------
 		TYPE_TDL_0		:	STRING	:= "C";															--! CO vs O Sampling TDL #1
