@@ -77,9 +77,12 @@ architecture Behavioral of tb_AXI4Stream_XUS_VirtualTDLWrapper is
 
 
 	---------------- Timing -------------------
-	constant	CLK_PERIOD 		    : time := 1 ns;									
-	constant	ASYNCINPUT_PERIOD 	: time := 12 ns;								
+	constant	CLK_PERIOD 		    : time := 1 ns;
+	constant	ASYNCINPUT_PERIOD 	: time := 12 ns;
 	--------------------------------------------
+
+    -- Technology node of the TDL --------------
+	constant    XUS_VS_X7S          :   XUS_VS_X7S_STRING     :=  "XUS";
 
 	-- Types of Edge of the Tapped Delay-Line --
 	constant	TYPE_TDL_ARRAY		:	CO_VS_O_ARRAY_STRING	:= (Others => "C");				--! CO vs O Sampling
@@ -120,7 +123,7 @@ architecture Behavioral of tb_AXI4Stream_XUS_VirtualTDLWrapper is
 	constant	STEP_VALID_TAP_POS	:	POSITIVE	:=	3;														--! Step used between MAX_VALID_TAP_POS and MIM_VALID_POS for assigned ValidPositionTap
 	constant	MAX_VALID_TAP_POS	:	NATURAL		:=	15;														--! Maximal position inside SampledTaps used by ValidPositionTap to extract the valid (MAX = HIGH that is LEFT attribute downto vect)
 	---------------------------
- 
+
 	--- Valid Initialization --
 	constant VALID_POSITION_TAP_INIT		:	INTEGER	RANGE 0 TO 4096		:=	1;             --! Initial position along the TDL from which we want to extract the valid in case of *DEBUG_MODE= FALSE*
 	constant VALID_NUMBER_OF_TDL_INIT		:	INTEGER	RANGE 0 TO 15		:=	0;			   --! Initial number of TDL from which we want to extract the valid in case of *DEBUG_MODE= FALSE*
@@ -151,6 +154,8 @@ architecture Behavioral of tb_AXI4Stream_XUS_VirtualTDLWrapper is
 	component AXI4Stream_XUS_VirtualTDLWrapper
 
 		generic (
+
+			XUS_VS_X7S          :   XUS_VS_X7S_STRING     :=  "XUS";
 
 			------------- Select Types of Edge of the Tapped Delay-Line ------------
 			TYPE_TDL_ARRAY		:	CO_VS_O_ARRAY_STRING	:= ("C", "O", Others => "C");				-- CO vs O Sampling
@@ -295,6 +300,8 @@ begin
 
 		generic map(
 
+            XUS_VS_X7S     =>   XUS_VS_X7S,
+
 			------------- Select Types of Edge of the Tapped Delay-Line ------------
 			TYPE_TDL_ARRAY		=>	TYPE_TDL_ARRAY,
 			------------------------------------------------------------------------
@@ -404,7 +411,7 @@ begin
 		wait for CLK_PERIOD/2;
 	end process;
 	----------------------------
-	
+
 	--- AsyncInput Process ----
 	--! AsyncInput Process
 	--! \vhdlflow [AsyncInput_process]

@@ -1,7 +1,7 @@
 # AXI4-Stream Virtual Tapped Delay-Line (V-TDL)
-This is a Vivado 2020.2 Project, AXI4Stream_XUS_VirtualTDL is an auto configurable Virtual Tapped Delay-Line (V-TDL) for Xilinx UltraScale (XUS) based on CARRY8 primitive.
+This is a Vivado 2020.2 Project, AXI4Stream_XUS(X7S)_VirtualTDL is an auto configurable Virtual Tapped Delay-Line (V-TDL) for Xilinx UltraScale or 7-Series based on CARRY8 or CARRY4 primitive.
 
-The Virtual Tapped Delay-Line (V-TDL) is able to work with multiple Tapped Delay-Line (TDL) for creating a V-TDL, XUS specifies the compatibility with Xilinx UltraScale (XUS).
+The Virtual Tapped Delay-Line (V-TDL) is able to work with multiple Tapped Delay-Line (TDL) for creating a V-TDL, XUS specifies the compatibility with Xilinx UltraScale, while X7S specifies the compatibility with Xilinx 7-Series.
 The module is composed by a *NUMBER_OF_TDL* of TDLs in parallel, each one composed by *NUM_TAP_TDL* taps, this create a V-TDL with *NUMBER_OF_TDL⋅ NUM_TAP_TDL*.
 In the following figure we can see one Tapped Delay-Line, more than these TDLs in parallel creates e V-TDL. We can derive that the propagation delay of a V-TDL is, in average, *NUMBER_OF_TDL* faster than the TDL ones (*tp*) :
 
@@ -61,6 +61,7 @@ Wrapping of *AXI4Stream_XUS_VirtualTDLWrapper* for AXI4-Stream interface for IP-
 ![IP-Core Image](doc/img/TappedDelayLine_IP-Core.png)
 
 ## Generic
+  - **XUS_VS_X7S**: Compatibility with UltraScale or 7-Series, *STRING* type.
 
   - **TYPE_TDL_i**: CO vs O Sampling TDL, with i in [0; *NUMBER_OF_TDL* -1], *STRING* type, default **C**.
 
@@ -118,6 +119,7 @@ We can find the following module in *hdl/*:
 
   - **Sampler_TDL (TDL)**: Sampling the TDL, with the possibility to decimate the TAPs, and define the valid all syncronized to the input clock.
   - **XUS_TappedDelayLine_CARRY8 (TDL)**: Simple TDL implemented using the CARRY8 primitive for Xilinx UltraScale.
+  - **X7S_TappedDelayLine_CARRY4 (TDL)**: Simple TDL implemented using the CARRY4 primitive for Xilinx 7-Series.
 
   - **LocalPackage_TDL (TDL)**: Functions for autoconfigurable all the VHDL file.
 

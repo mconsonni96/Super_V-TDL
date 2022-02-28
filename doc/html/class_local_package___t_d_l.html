@@ -78,7 +78,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="Functions"></a>
 Functions</h2></td></tr>
  <tr class="memitem:ab7615721af05e5d42aebebd6e79a25f7"><td class="memItemLeft" align="right" valign="top"><b><b><span class="keywordtype">integer</span><span class="vhdlchar"> </span></b></b>&#160;</td><td class="memItemRight" valign="bottom"> <a class="el" href="class_local_package___t_d_l.html#ab7615721af05e5d42aebebd6e79a25f7">Compute_NumCarryBlock</a><b> ( </b><b><span class="vhdlchar">num_tap_tdl: </span><span class="stringliteral">in </span><b><span class="keywordtype">integer</span><span class="vhdlchar"> </span></b></b><b> , <span class="vhdlchar">bit_carry_block: </span><span class="stringliteral">in </span><b><span class="keywordtype">positive</span><span class="vhdlchar"> </span></b></b><b> )</b></td></tr>
-<tr class="memdesc:ab7615721af05e5d42aebebd6e79a25f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used in the <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">XUS_TappedDelayLine_CARRY8</a></em> module in order to compute how many basic blocks <em>CARRY8</em> have to be chained in order to get the TDL. Given in input the <em>NUM_TAP_TDL</em> and <em>BIT_CARRY_BLOCK</em>, the function first computes the integer number of <em>NUM_CARRY_BLOCK</em> by dividing the previous values. Then in case the division brings to a residual larger than zero, the function increments <em>NUM_CARRY_BLOCK</em> block by 1, in order to reach the following integer number. In the case the division provides '0', it is enough just 1 <em>CARRY8</em> block.  <a href="#ab7615721af05e5d42aebebd6e79a25f7"></a><br /></td></tr>
+<tr class="memdesc:ab7615721af05e5d42aebebd6e79a25f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used in the <em>XUS(X7S)_TappedDelayLine_CARRY8(4)</em> module in order to compute how many basic blocks <em>CARRY8(4)</em> have to be chained in order to get the TDL. Given in input the <em>NUM_TAP_TDL</em> and <em>BIT_CARRY_BLOCK</em>, the function first computes the integer number of <em>NUM_CARRY_BLOCK</em> by dividing the previous values. Then in case the division brings to a residual larger than zero, the function increments <em>NUM_CARRY_BLOCK</em> block by 1, in order to reach the following integer number. In the case the division provides '0', it is enough just 1 <em>CARRY8(4)</em> block.  <a href="#ab7615721af05e5d42aebebd6e79a25f7"></a><br /></td></tr>
 <tr class="memitem:aa55d797506c12c9ede2936a4bf1dd31b"><td class="memItemLeft" align="right" valign="top"><b><b><span class="keywordtype">std_logic_vector</span><span class="vhdlchar"> </span></b></b>&#160;</td><td class="memItemRight" valign="bottom"> <a class="el" href="class_local_package___t_d_l.html#aa55d797506c12c9ede2936a4bf1dd31b">Sample_AsyncTapsTDL</a><b> ( </b><br />
 <b><span class="vhdlchar">type_tdl: </span><span class="stringliteral">in </span><b><span class="keywordtype">string</span><span class="vhdlchar"> </span></b></b><br />
 <b><span class="vhdlchar">num_tap_tdl: </span><span class="stringliteral">in </span><b><span class="keywordtype">positive</span><span class="vhdlchar"> </span></b></b><br />
@@ -110,9 +110,9 @@ Functions</h2></td></tr>
 <b><span class="vhdlchar">num_tap_tdl: </span><span class="stringliteral">in </span><b><span class="keywordtype">positive</span><span class="vhdlchar"> </span></b></b><br />
 <b><span class="vhdlchar">number_of_tdl: </span><span class="stringliteral">in </span><b><span class="keywordtype">positive</span><span class="vhdlchar"> </span></b></b><br />
 <b> )</b></td></tr>
-<tr class="memdesc:a469fdb3ed2c01747118a8af02b896809"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used in the <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> module in order to extract from a file .txt the values of the delays of the CO and O outputs in simulation phase. It takes in input a file.txt containing in the first row the unit of measure of the delays, and in the following rows the values of the delays written as integers. The file .txt basically contains a matrix, that can be read in this way: each columns represents a TDL, and in each column we have the values of the delay (as integers) of each buffer contained in the TDL of interest. Then the function saves these values in a matrix, containing the values of <em>Time</em> type. An important feature of this function is that it has to be exploited and activated only if we are in simulation, so only if <em>SIM_VS_IMP = "SIM"</em>, because if we are in implementation phase we don't have to read any delay from the external world.  <a href="#a469fdb3ed2c01747118a8af02b896809"></a><br /></td></tr>
+<tr class="memdesc:a469fdb3ed2c01747118a8af02b896809"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used in the <em>AXI4Stream_XUS(X7S)_VirtualTDLWrapper</em> module in order to extract from a file .txt the values of the delays of the CO and O outputs in simulation phase. It takes in input a file.txt containing in the first row the unit of measure of the delays, and in the following rows the values of the delays written as integers. The file .txt basically contains a matrix, that can be read in this way: each columns represents a TDL, and in each column we have the values of the delay (as integers) of each buffer contained in the TDL of interest. Then the function saves these values in a matrix, containing the values of <em>Time</em> type. An important feature of this function is that it has to be exploited and activated only if we are in simulation, so only if <em>SIM_VS_IMP = "SIM"</em>, because if we are in implementation phase we don't have to read any delay from the external world.  <a href="#a469fdb3ed2c01747118a8af02b896809"></a><br /></td></tr>
 <tr class="memitem:abc57123ea2a9a21f1c7bdcded68cc46e"><td class="memItemLeft" align="right" valign="top"><b><b><b><a class="el" href="class_local_package___t_d_l.html#a19a7304d90b6168cb96d94f0aeb32449">TIME_ARRAY_TYPE</a></b> <span class="vhdlchar"> </span></b></b>&#160;</td><td class="memItemRight" valign="bottom"> <a class="el" href="class_local_package___t_d_l.html#abc57123ea2a9a21f1c7bdcded68cc46e">From_TimeMatrix_To_TimeArray</a><b> ( </b><b><span class="vhdlchar">co_o_delay_matrix: </span><span class="stringliteral">in </span><span class="vhdlchar">TIME_MATRIX_TYPE</span></b><b> , <span class="vhdlchar">tdl_to_extract: </span><span class="stringliteral">in </span><b><span class="keywordtype">integer</span><span class="vhdlchar"> </span></b></b><b> )</b></td></tr>
-<tr class="memdesc:abc57123ea2a9a21f1c7bdcded68cc46e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used in the <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> module in order to extract from the matrix of delays (<em>CO_DELAY</em> \ <em>O_DELAY</em>) just an array of <em>MAX_NUMBER_OF_TAP</em> length, and this array corresponds to the delay of the corresponding TDL.  <a href="#abc57123ea2a9a21f1c7bdcded68cc46e"></a><br /></td></tr>
+<tr class="memdesc:abc57123ea2a9a21f1c7bdcded68cc46e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used in the <em>AXI4Stream_XUS(X7S)_VirtualTDLWrapper</em> module in order to extract from the matrix of delays (<em>CO_DELAY</em> \ <em>O_DELAY</em>) just an array of <em>MAX_NUMBER_OF_TAP</em> length, and this array corresponds to the delay of the corresponding TDL.  <a href="#abc57123ea2a9a21f1c7bdcded68cc46e"></a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="Procedures"></a>
 Procedures</h2></td></tr>
@@ -122,7 +122,7 @@ Procedures</h2></td></tr>
   <b><span class="keywordflow">signal </span><span class="vhdlchar">O_Taps: </span><span class="stringliteral"></span> <b><span class="keywordflow">in</span><span class="vhdlchar"> </span><span class="keywordtype">STD_LOGIC_VECTOR</span><span class="vhdlchar"> </span></b></b><br />
   <b><span class="keywordflow">signal </span><span class="vhdlchar">AsyncTaps_TDL: </span><span class="stringliteral"></span> <b><span class="keywordflow">out</span><span class="vhdlchar"> </span><span class="keywordtype">STD_LOGIC_VECTOR</span><span class="vhdlchar"> </span></b></b><br />
    )</td></tr>
-<tr class="memdesc:a96bbe257a05b175450b9e8a7c00781c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This procedure is used in the <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> module in order to select the CO outputs of each buffer or the O output of each buffer. It takes in input <em>TYPE_TDL</em>, <em>CO_Taps</em> and <em>O_Taps</em> and gives in output <em>AsyncTaps_TDL</em>. If <em>TYPE_TDL</em> = "C" it associates to <em>AsyncTaps_TDL</em> the outputs <em>CO_Taps</em>. If <em>TYPE_TDL</em> = "O" it associates to <em>AsyncTaps_TDL</em> the outputs <em>O_Taps</em>.  <a href="#a96bbe257a05b175450b9e8a7c00781c1"></a><br /></td></tr>
+<tr class="memdesc:a96bbe257a05b175450b9e8a7c00781c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This procedure is used in the <em>AXI4Stream_XUS(X7S)_VirtualTDLWrapper</em> module in order to select the CO outputs of each buffer or the O output of each buffer. It takes in input <em>TYPE_TDL</em>, <em>CO_Taps</em> and <em>O_Taps</em> and gives in output <em>AsyncTaps_TDL</em>. If <em>TYPE_TDL</em> = "C" it associates to <em>AsyncTaps_TDL</em> the outputs <em>CO_Taps</em>. If <em>TYPE_TDL</em> = "O" it associates to <em>AsyncTaps_TDL</em> the outputs <em>O_Taps</em>.  <a href="#a96bbe257a05b175450b9e8a7c00781c1"></a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="Libraries"></a>
 Libraries</h2></td></tr>
@@ -160,8 +160,10 @@ Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="Subtypes"></a>
 Subtypes</h2></td></tr>
- <tr class="memitem:aae5d0ee0e5bfeb1b58b679079ce7ddfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_local_package___t_d_l.html#aae5d0ee0e5bfeb1b58b679079ce7ddfa">CO_VS_O_STRING</a> &#160;</td><td class="memItemRight" valign="bottom"><b><span class="keywordtype">string</span><span class="vhdlchar"> </span><span class="vhdlchar">(</span><span class="vhdlchar"> </span><span class="vhdlchar"> </span> <span class="vhdldigit">1</span> <span class="vhdlchar"> </span><span class="keywordflow">TO</span><span class="vhdlchar"> </span><span class="vhdlchar"> </span> <span class="vhdldigit">1</span> <span class="vhdlchar"> </span><span class="vhdlchar">)</span><span class="vhdlchar"> </span></b></td></tr>
-<tr class="memdesc:aae5d0ee0e5bfeb1b58b679079ce7ddfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of TDL in CARRY8 for Xilinx UltraScale.  <a href="#aae5d0ee0e5bfeb1b58b679079ce7ddfa"></a><br /></td></tr>
+ <tr class="memitem:a6d65bd897ee9bd46d2cfc2424e0e99b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_local_package___t_d_l.html#a6d65bd897ee9bd46d2cfc2424e0e99b8">XUS_VS_X7S_STRING</a> &#160;</td><td class="memItemRight" valign="bottom"><b><span class="keywordtype">string</span><span class="vhdlchar"> </span><span class="vhdlchar">(</span><span class="vhdlchar"> </span><span class="vhdlchar"> </span> <span class="vhdldigit">1</span> <span class="vhdlchar"> </span><span class="keywordflow">TO</span><span class="vhdlchar"> </span><span class="vhdlchar"> </span> <span class="vhdldigit">3</span> <span class="vhdlchar"> </span><span class="vhdlchar">)</span><span class="vhdlchar"> </span></b></td></tr>
+<tr class="memdesc:a6d65bd897ee9bd46d2cfc2424e0e99b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Technology node of the TDL i.e. UltraScale(+) or Xilinx 7-Series.  <a href="#a6d65bd897ee9bd46d2cfc2424e0e99b8"></a><br /></td></tr>
+<tr class="memitem:aae5d0ee0e5bfeb1b58b679079ce7ddfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_local_package___t_d_l.html#aae5d0ee0e5bfeb1b58b679079ce7ddfa">CO_VS_O_STRING</a> &#160;</td><td class="memItemRight" valign="bottom"><b><span class="keywordtype">string</span><span class="vhdlchar"> </span><span class="vhdlchar">(</span><span class="vhdlchar"> </span><span class="vhdlchar"> </span> <span class="vhdldigit">1</span> <span class="vhdlchar"> </span><span class="keywordflow">TO</span><span class="vhdlchar"> </span><span class="vhdlchar"> </span> <span class="vhdldigit">1</span> <span class="vhdlchar"> </span><span class="vhdlchar">)</span><span class="vhdlchar"> </span></b></td></tr>
+<tr class="memdesc:aae5d0ee0e5bfeb1b58b679079ce7ddfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of TDL in CARRY8(4) for Xilinx UltraScale (7-Series)  <a href="#aae5d0ee0e5bfeb1b58b679079ce7ddfa"></a><br /></td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a469fdb3ed2c01747118a8af02b896809"></a>
@@ -210,7 +212,7 @@ Subtypes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This function is used in the <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> module in order to extract from a file .txt the values of the delays of the CO and O outputs in simulation phase. It takes in input a file.txt containing in the first row the unit of measure of the delays, and in the following rows the values of the delays written as integers. The file .txt basically contains a matrix, that can be read in this way: each columns represents a TDL, and in each column we have the values of the delay (as integers) of each buffer contained in the TDL of interest. Then the function saves these values in a matrix, containing the values of <em>Time</em> type. An important feature of this function is that it has to be exploited and activated only if we are in simulation, so only if <em>SIM_VS_IMP = "SIM"</em>, because if we are in implementation phase we don't have to read any delay from the external world. </p>
+<p>This function is used in the <em>AXI4Stream_XUS(X7S)_VirtualTDLWrapper</em> module in order to extract from a file .txt the values of the delays of the CO and O outputs in simulation phase. It takes in input a file.txt containing in the first row the unit of measure of the delays, and in the following rows the values of the delays written as integers. The file .txt basically contains a matrix, that can be read in this way: each columns represents a TDL, and in each column we have the values of the delay (as integers) of each buffer contained in the TDL of interest. Then the function saves these values in a matrix, containing the values of <em>Time</em> type. An important feature of this function is that it has to be exploited and activated only if we are in simulation, so only if <em>SIM_VS_IMP = "SIM"</em>, because if we are in implementation phase we don't have to read any delay from the external world. </p>
 <div class="image">
 <img src="Filetxt.png" alt=""/>
 </div>
@@ -251,7 +253,7 @@ Subtypes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This function is used in the <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">XUS_TappedDelayLine_CARRY8</a></em> module in order to compute how many basic blocks <em>CARRY8</em> have to be chained in order to get the TDL. Given in input the <em>NUM_TAP_TDL</em> and <em>BIT_CARRY_BLOCK</em>, the function first computes the integer number of <em>NUM_CARRY_BLOCK</em> by dividing the previous values. Then in case the division brings to a residual larger than zero, the function increments <em>NUM_CARRY_BLOCK</em> block by 1, in order to reach the following integer number. In the case the division provides '0', it is enough just 1 <em>CARRY8</em> block. </p>
+<p>This function is used in the <em>XUS(X7S)_TappedDelayLine_CARRY8(4)</em> module in order to compute how many basic blocks <em>CARRY8(4)</em> have to be chained in order to get the TDL. Given in input the <em>NUM_TAP_TDL</em> and <em>BIT_CARRY_BLOCK</em>, the function first computes the integer number of <em>NUM_CARRY_BLOCK</em> by dividing the previous values. Then in case the division brings to a residual larger than zero, the function increments <em>NUM_CARRY_BLOCK</em> block by 1, in order to reach the following integer number. In the case the division provides '0', it is enough just 1 <em>CARRY8(4)</em> block. </p>
 
 </div>
 </div>
@@ -392,7 +394,7 @@ Subtypes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This function is used in the <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> module in order to extract from the matrix of delays (<em>CO_DELAY</em> \ <em>O_DELAY</em>) just an array of <em>MAX_NUMBER_OF_TAP</em> length, and this array corresponds to the delay of the corresponding TDL. </p>
+<p>This function is used in the <em>AXI4Stream_XUS(X7S)_VirtualTDLWrapper</em> module in order to extract from the matrix of delays (<em>CO_DELAY</em> \ <em>O_DELAY</em>) just an array of <em>MAX_NUMBER_OF_TAP</em> length, and this array corresponds to the delay of the corresponding TDL. </p>
 
 </div>
 </div>
@@ -519,7 +521,7 @@ Subtypes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This procedure is used in the <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> module in order to select the CO outputs of each buffer or the O output of each buffer. It takes in input <em>TYPE_TDL</em>, <em>CO_Taps</em> and <em>O_Taps</em> and gives in output <em>AsyncTaps_TDL</em>. If <em>TYPE_TDL</em> = "C" it associates to <em>AsyncTaps_TDL</em> the outputs <em>CO_Taps</em>. If <em>TYPE_TDL</em> = "O" it associates to <em>AsyncTaps_TDL</em> the outputs <em>O_Taps</em>. </p>
+<p>This procedure is used in the <em>AXI4Stream_XUS(X7S)_VirtualTDLWrapper</em> module in order to select the CO outputs of each buffer or the O output of each buffer. It takes in input <em>TYPE_TDL</em>, <em>CO_Taps</em> and <em>O_Taps</em> and gives in output <em>AsyncTaps_TDL</em>. If <em>TYPE_TDL</em> = "C" it associates to <em>AsyncTaps_TDL</em> the outputs <em>CO_Taps</em>. If <em>TYPE_TDL</em> = "O" it associates to <em>AsyncTaps_TDL</em> the outputs <em>O_Taps</em>. </p>
 
 </div>
 </div>
@@ -568,7 +570,7 @@ Subtypes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Type of TDL in CARRY8 for Xilinx UltraScale. </p>
+<p>Type of TDL in CARRY8(4) for Xilinx UltraScale (7-Series) </p>
 
 </div>
 </div>
@@ -812,8 +814,32 @@ Subtypes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6d65bd897ee9bd46d2cfc2424e0e99b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d65bd897ee9bd46d2cfc2424e0e99b8">&#9670;&nbsp;</a></span>XUS_VS_X7S_STRING</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_local_package___t_d_l.html#a6d65bd897ee9bd46d2cfc2424e0e99b8">XUS_VS_X7S_STRING</a> <b><span class="keywordtype">string</span><span class="vhdlchar"> </span><span class="vhdlchar">(</span><span class="vhdlchar"> </span><span class="vhdlchar"> </span> <span class="vhdldigit">1</span> <span class="vhdlchar"> </span><span class="keywordflow">TO</span><span class="vhdlchar"> </span><span class="vhdlchar"> </span> <span class="vhdldigit">3</span> <span class="vhdlchar"> </span><span class="vhdlchar">)</span><span class="vhdlchar"> </span></b> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">Subtype</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Technology node of the TDL i.e. UltraScale(+) or Xilinx 7-Series. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl/hdl/<a class="el" href="_local_package___t_d_l_8vhd.html">LocalPackage_TDL.vhd</a></li>
+<li>/home/mconsonni/Utility_Ip_Core/ip-repo/axi4stream_xus_virtualtdl-dev/hdl/<a class="el" href="_local_package___t_d_l_8vhd.html">LocalPackage_TDL.vhd</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

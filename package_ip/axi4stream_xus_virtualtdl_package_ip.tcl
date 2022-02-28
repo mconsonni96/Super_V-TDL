@@ -1,6 +1,6 @@
 
 # =========================== SET PATH =========================================
-set path "/home/utility_ip_core/ip-rep/axi4stream_xus_virtualtdl/package_ip"
+set path "/home/mconsonni/Utility_Ip_Core/ip-repo/axi4stream_xus_virtualtdl/package_ip"
 # ==============================================================================
 
 
@@ -12,16 +12,16 @@ set_property vendor $vendor [ipx::current_core]
 set library "ip"
 set_property library $library [ipx::current_core]
 
-set name "AXI4Stream_XUS_VirtualTDL"
+set name "AXI4Stream_VirtualTDL"
 set_property name $name [ipx::current_core]
 
 set version "1.0"
 set_property version $version [ipx::current_core]
 
-set display_name "AXI4-Stream Xilinx UltraSCALE V-TDL"
+set display_name "AXI4-Stream V-TDL"
 set_property display_name $display_name [ipx::current_core]
 
-set description "Virtual Tapped Delay-Line with AXI4-Stram interface for the TDC (UltraSCALE)"
+set description "Virtual Tapped Delay-Line with AXI4-Stream interface for the TDC (UltraSCALE and 7-Series)"
 set_property description $description [ipx::current_core]
 
 set vendor_display_name {DigiLAB}
@@ -44,9 +44,9 @@ set_property supported_families $supported_families [ipx::current_core]
 
 
 # ========================== Import TCL Functions ==============================
-set path [pwd]
-regsub -all {(.)/logs} $path {\1} path
-append path "/Repositories/2020.2/XUS/ip_user_files/axi4stream_xus_virtualtdl/package_ip"
+#set path [pwd]
+#regsub -all {(.)/logs} $path {\1} path
+#append path "/Repositories/2020.2/XUS/ip_user_files/axi4stream_xus_virtualtdl/package_ip"
 
 
 # ==============================================================================
@@ -57,6 +57,7 @@ append param_path "/ip_customization_parameters/"
 source [join [list $param_path "set_param_fx.tcl"] ""] -notrace
 
 
+source [join [list $param_path "set_xus_vs_x7s.tcl"] ""] -notrace
 source [join [list $param_path "set_bit_smp_tdl.tcl"] ""] -notrace
 source [join [list $param_path "set_buffering_stage.tcl"] ""] -notrace
 source [join [list $param_path "set_debug_mode_tdl.tcl"] ""] -notrace

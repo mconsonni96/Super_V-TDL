@@ -81,12 +81,17 @@ package LocalPackage_TDL is
 	CONSTANT	MAX_NUMBER_OF_TDL	:	INTEGER	:=	16;							--! Max number of TDLs allowed
 	------------------------------------------------
 
-	
+
 	--------------------------- TYPES DECLARATION ------------------------------
 
 	--------------- Type for TDLs -----------------
-	-- Type of TDL in CARRY8 for Xilinx UltraScale
-	subtype CO_VS_O_STRING is string(1 TO 1);																--! Type of TDL in CARRY8 for Xilinx UltraScale
+
+
+    -- Technology node of the TDL ------------------------
+	subtype XUS_VS_X7S_STRING is string(1 TO 3);                                                            --! Technology node of the TDL i.e. UltraScale(+) or Xilinx 7-Series
+
+	-- Type of TDL in CARRY8(4) for Xilinx UltraScale (7-Series)
+	subtype CO_VS_O_STRING is string(1 TO 1);																--! Type of TDL in CARRY8(4) for Xilinx UltraScale (7-Series)
 
 	-- Array of CO_VS_O_STRING, one for each TDL
 	type CO_VS_O_ARRAY_STRING	is array (0 TO MAX_NUMBER_OF_TDL-1)	of	CO_VS_O_STRING;						--! Type used to make more compact the definition of the kind of output (CO or O) of each one of the TDLs in parallel.
@@ -109,14 +114,14 @@ package LocalPackage_TDL is
 
 
 
-	-------- FUNCTIONS AND PROCEDURES FOR XUS_TAPPED_DELAY_LINE_CARRY8 ---------
+	-------- FUNCTIONS AND PROCEDURES FOR XUS(X7S)_TAPPED_DELAY_LINE_CARRY8(4) ---------
 
 	------- Compute the Number of Carry Blocks ------
-	--! \brief This function is used in the *XUS_TappedDelayLine_CARRY8* module in order to compute how many basic blocks *CARRY8* have to be chained in order to get the TDL.
+	--! \brief This function is used in the *XUS(X7S)_TappedDelayLine_CARRY8(4)* module in order to compute how many basic blocks *CARRY8(4)* have to be chained in order to get the TDL.
 	--! Given in input the *NUM_TAP_TDL* and *BIT_CARRY_BLOCK*, the function first computes the integer number of *NUM_CARRY_BLOCK* by dividing the previous values.
 	--! Then in case the division brings to a residual larger than zero,
 	--! the function increments  *NUM_CARRY_BLOCK* block by 1, in order to reach the following integer number.
-	--! In the case the division provides '0', it is enough just 1 *CARRY8* block.
+	--! In the case the division provides '0', it is enough just 1 *CARRY8(4)* block.
 
 	function Compute_NumCarryBlock (
 
@@ -228,10 +233,10 @@ package LocalPackage_TDL is
 	----------------------------------------------------------------------------
 
 
-	---- FUNCTIONS AND PROCEDURES FOR AXI4 STREAM XUS VIRTUAL TDL WRAPPER ------
+	---- FUNCTIONS AND PROCEDURES FOR AXI4 STREAM XUS(X7S) VIRTUAL TDL WRAPPER ------
 
-	---- CO vs O CARRY8 Taps in Xilinx UltraScale ---
-	--! \brief This procedure is used in the *AXI4Stream_XUS_VirtualTDLWrapper* module in order to select the CO outputs of each buffer or the O output of each buffer.
+	---- CO vs O CARRY8(4) Taps in Xilinx UltraScale (7-Series) ---
+	--! \brief This procedure is used in the *AXI4Stream_XUS(X7S)_VirtualTDLWrapper* module in order to select the CO outputs of each buffer or the O output of each buffer.
 	--! It takes in input *TYPE_TDL*, *CO_Taps* and *O_Taps* and gives in output *AsyncTaps_TDL*.
 	--! If *TYPE_TDL* = "C" it associates to *AsyncTaps_TDL* the outputs *CO_Taps*.
 	--! If *TYPE_TDL* = "O" it associates to *AsyncTaps_TDL* the outputs *O_Taps*.
@@ -249,14 +254,15 @@ package LocalPackage_TDL is
 
 		------ Async Tapped Delay-Line Outputs ---------
 		signal	AsyncTaps_TDL	:	OUT	STD_LOGIC_VECTOR								-- Async Taps
-		
+
 		----------------------------------------------
 
 	);
 	-----------------------------------------------
 
+
 	--- Extract Delay for Simulation from File ----
-	--! \brief This function is used in the *AXI4Stream_XUS_VirtualTDLWrapper* module in order to extract from a file .txt the values of the delays of the CO and O outputs in simulation phase.
+	--! \brief This function is used in the *AXI4Stream_XUS(X7S)_VirtualTDLWrapper* module in order to extract from a file .txt the values of the delays of the CO and O outputs in simulation phase.
 	--! It takes in input a file.txt containing in the first row the unit of measure of the delays, and in the following rows the values of the delays written as integers.
 	--! The file .txt basically contains a matrix, that can be read in this way: each columns represents a TDL, and in each column we have the values of the delay (as integers) of each buffer contained in the TDL of interest.
 	--! Then the function saves these values in a matrix, containing the values of *Time* type. An important feature of this function is that it has to be exploited and activated only if we are in simulation,
@@ -287,7 +293,7 @@ package LocalPackage_TDL is
 
 
 	------ Extract the TDL from Time Matrix -------
-	--! \brief This function is used in the *AXI4Stream_XUS_VirtualTDLWrapper* module in order to extract from the matrix of delays (*CO_DELAY* \ *O_DELAY*) just an array of *MAX_NUMBER_OF_TAP* length,
+	--! \brief This function is used in the *AXI4Stream_XUS(X7S)_VirtualTDLWrapper* module in order to extract from the matrix of delays (*CO_DELAY* \ *O_DELAY*) just an array of *MAX_NUMBER_OF_TAP* length,
 	--! and this array corresponds to the delay of the corresponding TDL.
 
 	function From_TimeMatrix_To_TimeArray(
@@ -308,7 +314,7 @@ end LocalPackage_TDL;
 package body LocalPackage_TDL is
 
 
-	-------- FUNCTIONS AND PROCEDURES FOR XUS_TAPPED_DELAY_LINE_CARRY8 ---------
+	-------- FUNCTIONS AND PROCEDURES FOR XUS(X7S)_TAPPED_DELAY_LINE_CARRY8(4) ---------
 
 	------- Compute the Number of Carry Blocks ------
 	--! Description of the signals of the procedure:
@@ -423,13 +429,13 @@ package body LocalPackage_TDL is
 
 		elsif type_tdl = "O"  then
 			SampledTaps_tmp	:= (Others => '1');
-		
+
 		end if;
 
 
 		-- Sampling of the BIT_SMP_PRE_TDL from the NUM_TAP_PRE_TDL AsyncTaps_preTDL
 		for I in 0 to bit_smp_pre_tdl -1 loop
-			SampledTaps_preTDL_tmp(I)	:=	AsyncTaps_preTDL(I*step_tap_pre_tdl);   
+			SampledTaps_preTDL_tmp(I)	:=	AsyncTaps_preTDL(I*step_tap_pre_tdl);
 		end loop;
 
 
@@ -441,7 +447,7 @@ package body LocalPackage_TDL is
 
 			-- Resize Offset
 			if offset_tap_tdl >= step_tap_tdl then
-				offset_tap_tmp	:=	offset_tap_tdl mod step_tap_tdl;   
+				offset_tap_tmp	:=	offset_tap_tdl mod step_tap_tdl;
 			else
 				offset_tap_tmp	:=	offset_tap_tdl;
 			end if;
@@ -468,7 +474,7 @@ package body LocalPackage_TDL is
 	--! \param max_valid_pos Maximal position inside SampledTaps used by *ValidPositionTap* to extract the valid
 	--! \param bit_smp_pre_tdl Number of bits sampled from the TDL
 	--! \param SampledTaps_TDL Sampled data from both the preTDL and TDL
-	
+
 
 	function Compute_ValidPositionSampledTapsTDL (
 
@@ -575,9 +581,9 @@ package body LocalPackage_TDL is
 
 
 
-	---- FUNCTIONS AND PROCEDURES FOR AXI4 STREAM XUS VIRTUAL TDL WRAPPER ------
+	---- FUNCTIONS AND PROCEDURES FOR AXI4 STREAM XUS(X7S) VIRTUAL TDL WRAPPER ------
 
-	---- CO vs O CARRY8 Taps in Xilinx UltraScale ---
+	---- CO vs O CARRY8(4) Taps in Xilinx UltraScale ---
 	--! Description of the signals of the procedure:
 	--! \param type_tdl CO vs O Sampling
 	--! \param CO_Taps CO Taps in output, AsyncInput delayed not inverted
@@ -591,27 +597,27 @@ package body LocalPackage_TDL is
 		---------------------------------------------
 
 		------------- Tapped Delay-Line --------------
-		signal	CO_Taps	:	IN	STD_LOGIC_VECTOR;								-- CO Taps in output, AsyncInput delayed not inverted	
-		signal	O_Taps	:	IN	STD_LOGIC_VECTOR;								-- O Taps in output, AsyncInput delayed and inverted	
+		signal	CO_Taps	:	IN	STD_LOGIC_VECTOR;								-- CO Taps in output, AsyncInput delayed not inverted
+		signal	O_Taps	:	IN	STD_LOGIC_VECTOR;								-- O Taps in output, AsyncInput delayed and inverted
 		----------------------------------------------
 
 		------ Async Tapped Delay-Line Input ---------
 		signal	AsyncTaps_TDL	:	OUT	STD_LOGIC_VECTOR						-- Async Taps
-		
+
 		----------------------------------------------
 
 	) is
 
 	begin
 
-		-- Choose TDL between CO and O Taps of CARRY8 in Xilinx UltraScale
+		-- Choose TDL between CO and O Taps of CARRY8(4) in Xilinx UltraScale (7-Series)
 		if type_tdl = "C" then
 			AsyncTaps_TDL	<=	CO_Taps;
 
 		elsif type_tdl = "O" then
 			AsyncTaps_TDL 	<=	O_Taps;
-		
-		
+
+
 		end if;
 
 

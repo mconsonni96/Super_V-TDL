@@ -77,7 +77,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This module first imports the value of <em>CO_DELAY_MATRIX</em> and <em>O_DELAY_MATRIX</em> from a .txt file by means of the <em>CO_O_ExtractDelayFromFile</em> function. Then it instantiates the <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">XUS_TappedDelayLine_CARRY8</a></em> and the <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em>. After that, the module generates as many <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">XUS_TappedDelayLine_CARRY8</a></em> and <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em> as <em>NUMBER_OF_TDL</em>, and thanks to the function <em>From_TimeMatrix_To_TimeArray</em> for each TDL created, the function associates the corresponding delay, written in the <em>CO_DELAY_MATRIX</em> matrix or in the <em>O_DELAY_MATRIX</em> depending on the taps we have chosen (O or CO). In this way we obtain <em>NUMBER_OF_TDL</em> TDLs in parallel. Thanks to the procedure <em>XUS_Choose_AsyncTaps_TDL</em>, we decide whether we want to read the CO taps, or the O taps of the buffer chain. At the end, the module selects the desired Valid (<em>m00_axis_undeco_tvalid</em>) from one of the possible TDLs, by means of <em>ValidNumberOfTdl</em> in case of <em>DEBUG MODE = TRUE</em> or by means of <em>VALID_NUMBER_OF_TDL_INIT</em> in case of <em>DEBUG_MODE = FALSE</em>. Then the module brings in output the sampled data (<em>m00_axis_undeco_tdata</em>) by means of the <em>From_SampledTaps_to_Undeco</em> procedure.  
+<p>This module first imports the value of <em>CO_DELAY_MATRIX</em> and <em>O_DELAY_MATRIX</em> from a .txt file by means of the <em>CO_O_ExtractDelayFromFile</em> function. Then it instantiates the <em>XUS(X7S)_TappedDelayLine_CARRY8(4)</em> and the <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em>. After that, the module generates as many <em>XUS(X7S)_TappedDelayLine_CARRY8(4)</em> and <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em> as <em>NUMBER_OF_TDL</em>, and thanks to the function <em>From_TimeMatrix_To_TimeArray</em> for each TDL created, the function associates the corresponding delay, written in the <em>CO_DELAY_MATRIX</em> matrix or in the <em>O_DELAY_MATRIX</em> depending on the taps we have chosen (O or CO). In this way we obtain <em>NUMBER_OF_TDL</em> TDLs in parallel. Thanks to the procedure <em>XUS(X7S)_Choose_AsyncTaps_TDL</em>, we decide whether we want to read the CO taps, or the O taps of the buffer chain. At the end, the module selects the desired Valid (<em>m00_axis_undeco_tvalid</em>) from one of the possible TDLs, by means of <em>ValidNumberOfTdl</em> in case of <em>DEBUG MODE = TRUE</em> or by means of <em>VALID_NUMBER_OF_TDL_INIT</em> in case of <em>DEBUG_MODE = FALSE</em>. Then the module brings in output the sampled data (<em>m00_axis_undeco_tdata</em>) by means of the <em>From_SampledTaps_to_Undeco</em> procedure.  
  <a href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_1_1_behavioral.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="Procedures"></a>
@@ -93,6 +93,8 @@ Procedures</h2></td></tr>
 Components</h2></td></tr>
  <tr class="memitem:a841970d2fcb272dd2aab4ad6656764b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_1_1_behavioral.html#a841970d2fcb272dd2aab4ad6656764b5">XUS_TappedDelayLine_CARRY8</a>&#160;</td><td class="memItemRight" valign="bottom">  <b></b>  <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html">&lt;Entity XUS_TappedDelayLine_CARRY8&gt; </a></em></td></tr>
 <tr class="memdesc:a841970d2fcb272dd2aab4ad6656764b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This module creates the chain containing <em>NUM_TAP_TDL</em> buffers, starting from the basic block <em>CARRY8</em>, which contains 8 buffers, in the case of <em>SIM_VS_IMP = "IMP"</em>. Instead in the case of <em>SIM_VS_IMP = "SIM"</em>, it generates <em>NUM_TAP_TDL</em> dummy buffers in order to simulate the delay of the real buffer, but without implementing it.  <a href="#a841970d2fcb272dd2aab4ad6656764b5"></a><br /></td></tr>
+<tr class="memitem:adaa9689efd8d0af3414ed86f75913aaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_1_1_behavioral.html#adaa9689efd8d0af3414ed86f75913aaf">X7S_TappedDelayLine_CARRY4</a>&#160;</td><td class="memItemRight" valign="bottom">  <b></b>  <em><a class="el" href="class_x7_s___tapped_delay_line___c_a_r_r_y4.html">&lt;Entity X7S_TappedDelayLine_CARRY4&gt; </a></em></td></tr>
+<tr class="memdesc:adaa9689efd8d0af3414ed86f75913aaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This module creates the chain containing <em>NUM_TAP_TDL</em> buffers, starting from the basic block <em>CARRY4</em>, which contains 4 buffers, in the case of <em>SIM_VS_IMP = "IMP"</em>. Instead in the case of <em>SIM_VS_IMP = "SIM"</em>, it generates <em>NUM_TAP_TDL</em> dummy buffers in order to simulate the delay of the real buffer, but without implementing it.  <a href="#adaa9689efd8d0af3414ed86f75913aaf"></a><br /></td></tr>
 <tr class="memitem:aba54a24dfc322313d14f16278166c1b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_1_1_behavioral.html#aba54a24dfc322313d14f16278166c1b7">Sampler_TDL</a>&#160;</td><td class="memItemRight" valign="bottom">  <b></b>  <em><a class="el" href="class_sampler___t_d_l.html">&lt;Entity Sampler_TDL&gt; </a></em></td></tr>
 <tr class="memdesc:aba54a24dfc322313d14f16278166c1b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This module is responsible for selecting where to put the Flip flops along the chain to sample the input data, and for determining the valid in each single TDL. Furthermore, if <em>BUFFERING_STAGE = TRUE</em>, the module synchronizes the sampled data and the corresponing valid at the same clock pulse.  <a href="#aba54a24dfc322313d14f16278166c1b7"></a><br /></td></tr>
 </table><table class="memberdecls">
@@ -139,10 +141,11 @@ Signals</h2></td></tr>
 Instantiations</h2></td></tr>
  <tr class="memitem:af95420b81d102a1152f7ec48b4219ad6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_1_1_behavioral.html#af95420b81d102a1152f7ec48b4219ad6">inst_tdl</a>&#160;</td><td class="memItemRight" valign="bottom">  <b>XUS_TappedDelayLine_CARRY8</b>  <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html">&lt;Entity XUS_TappedDelayLine_CARRY8&gt;</a></em></td></tr>
 <tr class="memdesc:af95420b81d102a1152f7ec48b4219ad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> generates as many <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">XUS_TappedDelayLine_CARRY8</a></em> as <em>NUMBER_OF_TDL</em>.  <a href="#af95420b81d102a1152f7ec48b4219ad6"></a><br /></td></tr>
+<tr class="memitem:af95420b81d102a1152f7ec48b4219ad6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_1_1_behavioral.html#af95420b81d102a1152f7ec48b4219ad6">inst_tdl</a>&#160;</td><td class="memItemRight" valign="bottom">  <b>X7S_TappedDelayLine_CARRY4</b>  <em><a class="el" href="class_x7_s___tapped_delay_line___c_a_r_r_y4.html">&lt;Entity X7S_TappedDelayLine_CARRY4&gt;</a></em></td></tr>
 <tr class="memitem:a29fdf86aa3bf93cec0af719701bc5c37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_1_1_behavioral.html#a29fdf86aa3bf93cec0af719701bc5c37">inst_sampler_tdl</a>&#160;</td><td class="memItemRight" valign="bottom">  <b>Sampler_TDL</b>  <em><a class="el" href="class_sampler___t_d_l.html">&lt;Entity Sampler_TDL&gt;</a></em></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This module first imports the value of <em>CO_DELAY_MATRIX</em> and <em>O_DELAY_MATRIX</em> from a .txt file by means of the <em>CO_O_ExtractDelayFromFile</em> function. Then it instantiates the <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">XUS_TappedDelayLine_CARRY8</a></em> and the <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em>. After that, the module generates as many <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">XUS_TappedDelayLine_CARRY8</a></em> and <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em> as <em>NUMBER_OF_TDL</em>, and thanks to the function <em>From_TimeMatrix_To_TimeArray</em> for each TDL created, the function associates the corresponding delay, written in the <em>CO_DELAY_MATRIX</em> matrix or in the <em>O_DELAY_MATRIX</em> depending on the taps we have chosen (O or CO). In this way we obtain <em>NUMBER_OF_TDL</em> TDLs in parallel. Thanks to the procedure <em>XUS_Choose_AsyncTaps_TDL</em>, we decide whether we want to read the CO taps, or the O taps of the buffer chain. At the end, the module selects the desired Valid (<em>m00_axis_undeco_tvalid</em>) from one of the possible TDLs, by means of <em>ValidNumberOfTdl</em> in case of <em>DEBUG MODE = TRUE</em> or by means of <em>VALID_NUMBER_OF_TDL_INIT</em> in case of <em>DEBUG_MODE = FALSE</em>. Then the module brings in output the sampled data (<em>m00_axis_undeco_tdata</em>) by means of the <em>From_SampledTaps_to_Undeco</em> procedure. </p>
+<div class="textblock"><p>This module first imports the value of <em>CO_DELAY_MATRIX</em> and <em>O_DELAY_MATRIX</em> from a .txt file by means of the <em>CO_O_ExtractDelayFromFile</em> function. Then it instantiates the <em>XUS(X7S)_TappedDelayLine_CARRY8(4)</em> and the <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em>. After that, the module generates as many <em>XUS(X7S)_TappedDelayLine_CARRY8(4)</em> and <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em> as <em>NUMBER_OF_TDL</em>, and thanks to the function <em>From_TimeMatrix_To_TimeArray</em> for each TDL created, the function associates the corresponding delay, written in the <em>CO_DELAY_MATRIX</em> matrix or in the <em>O_DELAY_MATRIX</em> depending on the taps we have chosen (O or CO). In this way we obtain <em>NUMBER_OF_TDL</em> TDLs in parallel. Thanks to the procedure <em>XUS(X7S)_Choose_AsyncTaps_TDL</em>, we decide whether we want to read the CO taps, or the O taps of the buffer chain. At the end, the module selects the desired Valid (<em>m00_axis_undeco_tvalid</em>) from one of the possible TDLs, by means of <em>ValidNumberOfTdl</em> in case of <em>DEBUG MODE = TRUE</em> or by means of <em>VALID_NUMBER_OF_TDL_INIT</em> in case of <em>DEBUG_MODE = FALSE</em>. Then the module brings in output the sampled data (<em>m00_axis_undeco_tdata</em>) by means of the <em>From_SampledTaps_to_Undeco</em> procedure. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3985bc34032eae7d492b2faa709eb6c7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3985bc34032eae7d492b2faa709eb6c7">&#9670;&nbsp;</a></span>From_SampledTaps_to_Undeco()</h2>
@@ -336,7 +339,7 @@ Instantiations</h2></td></tr>
 </div>
 </div>
 <a id="af95420b81d102a1152f7ec48b4219ad6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af95420b81d102a1152f7ec48b4219ad6">&#9670;&nbsp;</a></span>inst_tdl</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af95420b81d102a1152f7ec48b4219ad6">&#9670;&nbsp;</a></span>inst_tdl <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -357,6 +360,28 @@ Instantiations</h2></td></tr>
 
 <p>The <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> generates as many <em><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">XUS_TappedDelayLine_CARRY8</a></em> as <em>NUMBER_OF_TDL</em>. </p>
 <p>The <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> generates as many <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em> as <em>NUMBER_OF_TDL</em> </p>
+
+</div>
+</div>
+<a id="af95420b81d102a1152f7ec48b4219ad6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af95420b81d102a1152f7ec48b4219ad6">&#9670;&nbsp;</a></span>inst_tdl <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_1_1_behavioral.html#af95420b81d102a1152f7ec48b4219ad6">inst_tdl</a> <b><span class="vhdlchar">X7S_TappedDelayLine_CARRY4</span><span class="vhdlchar"> </span></b> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">Instantiation</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -624,6 +649,30 @@ Instantiations</h2></td></tr>
 
 </div>
 </div>
+<a id="adaa9689efd8d0af3414ed86f75913aaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaa9689efd8d0af3414ed86f75913aaf">&#9670;&nbsp;</a></span>X7S_TappedDelayLine_CARRY4</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_1_1_behavioral.html#adaa9689efd8d0af3414ed86f75913aaf">X7S_TappedDelayLine_CARRY4</a> <b><span class="vhdlchar"> </span></b> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">Component</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This module creates the chain containing <em>NUM_TAP_TDL</em> buffers, starting from the basic block <em>CARRY4</em>, which contains 4 buffers, in the case of <em>SIM_VS_IMP = "IMP"</em>. Instead in the case of <em>SIM_VS_IMP = "SIM"</em>, it generates <em>NUM_TAP_TDL</em> dummy buffers in order to simulate the delay of the real buffer, but without implementing it. </p>
+
+</div>
+</div>
 <a id="a841970d2fcb272dd2aab4ad6656764b5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a841970d2fcb272dd2aab4ad6656764b5">&#9670;&nbsp;</a></span>XUS_TappedDelayLine_CARRY8</h2>
 
@@ -649,7 +698,7 @@ Instantiations</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/nicola/Documents/Vivado/Repositories/2020.2/Utility_Ip_Core/ip_user_files/ip_repo/TDC_Basic/axi4stream_xus_virtualtdl/hdl/<a class="el" href="_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_8vhd.html">AXI4Stream_XUS_VirtualTDLWrapper.vhd</a></li>
+<li>/home/mconsonni/Utility_Ip_Core/ip-repo/axi4stream_xus_virtualtdl-dev/hdl/<a class="el" href="_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper_8vhd.html">AXI4Stream_XUS_VirtualTDLWrapper.vhd</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

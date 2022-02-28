@@ -82,6 +82,9 @@ entity AXI4Stream_XUS_VirtualTDLWrapper is
 
 	generic (
 
+        -------------- Select TDL for 7-Series or UltraScale(+) ----------------
+		XUS_VS_X7S          :   XUS_VS_X7S_STRING  := "XUS";
+
 		------------- Select Types of Edge of the Tapped Delay-Line ------------
 		TYPE_TDL_ARRAY		:	CO_VS_O_ARRAY_STRING	:= ("C", "O", Others => "C");				--! CO vs O Sampling
 		------------------------------------------------------------------------
@@ -100,7 +103,7 @@ entity AXI4Stream_XUS_VirtualTDLWrapper is
 		------ Simulation Delay ----
 		FILE_PATH_NAME_CO_DELAY		:	STRING	:=													--! Path of the .txt file that contains the CO delays for Simulation
 		"/home/mconsonni/Utility_Ip_Core/ip-repo/AXI4-Stream_XUS_VirtualTDL/src/CO_Delay.txt";
-		
+
 
 		FILE_PATH_NAME_O_DELAY		:	STRING	:=													--! Path of the .txt file that contains the O delays for Simulation
 		"/home/mconsonni/Utility_Ip_Core/ip-repo/AXI4-Stream_XUS_VirtualTDL/src/O_Delay.txt";
@@ -190,9 +193,9 @@ end AXI4Stream_XUS_VirtualTDLWrapper;
 
 ------------------------ ARCHITECTURE DESCRIPTION ------------------------------
 --! \brief This module first imports the value of *CO_DELAY_MATRIX* and *O_DELAY_MATRIX* from a .txt file by means of the *CO_O_ExtractDelayFromFile* function.
---! Then it instantiates the *XUS_TappedDelayLine_CARRY8* and the *Sampler_TDL*.
---! After that, the module generates as many *XUS_TappedDelayLine_CARRY8* and *Sampler_TDL* as *NUMBER_OF_TDL*, and thanks to the function *From_TimeMatrix_To_TimeArray* for each TDL created,
---! the function associates the corresponding delay, written in the *CO_DELAY_MATRIX* matrix or in the *O_DELAY_MATRIX* depending on the taps we have chosen (O or CO). In this way we obtain *NUMBER_OF_TDL* TDLs in parallel. Thanks to the procedure *XUS_Choose_AsyncTaps_TDL*, we decide whether we want to read the CO taps, or the O taps of the buffer chain.
+--! Then it instantiates the *XUS(X7S)_TappedDelayLine_CARRY8(4)* and the *Sampler_TDL*.
+--! After that, the module generates as many *XUS(X7S)_TappedDelayLine_CARRY8(4)* and *Sampler_TDL* as *NUMBER_OF_TDL*, and thanks to the function *From_TimeMatrix_To_TimeArray* for each TDL created,
+--! the function associates the corresponding delay, written in the *CO_DELAY_MATRIX* matrix or in the *O_DELAY_MATRIX* depending on the taps we have chosen (O or CO). In this way we obtain *NUMBER_OF_TDL* TDLs in parallel. Thanks to the procedure *XUS(X7S)_Choose_AsyncTaps_TDL*, we decide whether we want to read the CO taps, or the O taps of the buffer chain.
 --! At the end, the module selects the desired Valid (*m00_axis_undeco_tvalid*) from one of the possible TDLs, by means of *ValidNumberOfTdl* in case of *DEBUG MODE = TRUE* or by means of *VALID_NUMBER_OF_TDL_INIT* in case of
 --! *DEBUG_MODE = FALSE*. Then the module brings in output the sampled data (*m00_axis_undeco_tdata*) by means of the *From_SampledTaps_to_Undeco* procedure.
 --------------------------------------------------------------------------------
@@ -336,6 +339,44 @@ architecture Behavioral of AXI4Stream_XUS_VirtualTDLWrapper is
 	END COMPONENT;
 	-----------------------------------------------
 
+	----- Xilinx 7-Series TDL based on CARRY4 -----
+	--! \brief This module creates the chain containing *NUM_TAP_TDL* buffers, starting from the basic block *CARRY4*, which contains 4 buffers, in the case of *SIM_VS_IMP = "IMP"*.
+	--! Instead in the case of *SIM_VS_IMP = "SIM"*, it generates *NUM_TAP_TDL* dummy buffers in order to simulate the delay of the real buffer, but without implementing it.
+
+	COMPONENT X7S_TappedDelayLine_CARRY4
+		generic (
+
+			-------- Sim vs Impl ---------
+			SIM_VS_IMP	:	STRING	:= "IMP";							-- SIMULATION or IMPLEMENTATION
+
+			CO_DELAY	:	TIME_ARRAY_TYPE;									-- Delay for CO in Simulation
+			O_DELAY		:	TIME_ARRAY_TYPE;									-- Delay for O in Simulation
+			----------------------------
+
+			-------- Dimension ---------
+			NUM_TAP_TDL	:	POSITIVE	RANGE 4 TO 4096	:= 16;					-- Bits of Tapped Delay-Line
+			NUM_TAP_PRE_TDL			:	INTEGER	RANGE 0 TO 256	:= 256
+			----------------------------
+
+		);
+		port(
+			-------- Async Input --------
+			AsyncInput	:	IN	STD_LOGIC;										-- AsyncInput
+			-----------------------------
+
+			---- Tapped Delay-Line ------
+			CO_Taps_TDL	:	OUT	STD_LOGIC_VECTOR(NUM_TAP_TDL-1 downto 0);			-- CO Taps in output, AsyncInput delayed not inverted
+			O_Taps_TDL	:	OUT	STD_LOGIC_VECTOR(NUM_TAP_TDL-1 downto 0);			-- O Taps in output, AsyncInput delayed and inverted
+			-----------------------------
+
+			---- Tapped Delay-Line ------
+			CO_Taps_preTDL	:	OUT	STD_LOGIC_VECTOR(NUM_TAP_PRE_TDL-1 downto 0);				-- CO Taps in output of the PRE-TDL, AsyncInput delayed not inverted
+			O_Taps_preTDL	:	OUT	STD_LOGIC_VECTOR(NUM_TAP_PRE_TDL-1 downto 0)				-- O Taps in output of the PRE-TDL, AsyncInput delayed and inverted
+			-----------------------------
+		);
+	END COMPONENT;
+	-----------------------------------------------
+
 	---------- Sampler of a generic TDL -----------
 	--! \brief This module is responsible for selecting where to put the Flip flops along the chain to sample the input data, and for determining the valid in each single TDL.
 	--! Furthermore, if *BUFFERING_STAGE = TRUE*, the module synchronizes the sampled data and the corresponing valid at the same clock pulse.
@@ -348,7 +389,7 @@ architecture Behavioral of AXI4Stream_XUS_VirtualTDLWrapper is
 			---------------------------
 
 			-------- DEBUG MODE --------
-			DEBUG_MODE		:	BOOLEAN	:=	FALSE;											
+			DEBUG_MODE		:	BOOLEAN	:=	FALSE;
 			----------------------------
 
 			----- Buffering Stage -----
@@ -395,7 +436,7 @@ architecture Behavioral of AXI4Stream_XUS_VirtualTDLWrapper is
 			----------------------------------------------
 
 			------- Sampled and Sync TDL output ----------
-			Valid_SampledTaps_TDL	    	:	OUT	STD_LOGIC;											-- Valid of SampledTaps_TDL 
+			Valid_SampledTaps_TDL	    	:	OUT	STD_LOGIC;											-- Valid of SampledTaps_TDL
 			SampledTaps_TDL					:	OUT	STD_LOGIC_VECTOR(BIT_SMP_TDL-1 downto 0);			-- Sampled taps along the chain (just TDL)
 			----------------------------------------------
 
@@ -464,54 +505,94 @@ begin
 
 		------------------ XUS_TappedDelayLine_CARRY8 ----------------------
 		--! \brief The *AXI4Stream_XUS_VirtualTDLWrapper* generates as many *XUS_TappedDelayLine_CARRY8* as *NUMBER_OF_TDL*.
+        XUS_TDL_Generation : if XUS_VS_X7S = "XUS" generate
+			Inst_TDL	:	XUS_TappedDelayLine_CARRY8
+				generic map(
 
-		Inst_TDL	:	XUS_TappedDelayLine_CARRY8
-			generic map(
+					-------- Sim vs Impl ---------
+					SIM_VS_IMP	=>	SIM_VS_IMP,
 
-				-------- Sim vs Impl ---------
-				SIM_VS_IMP	=>	SIM_VS_IMP,
+					CO_DELAY	=>	From_TimeMatrix_To_TimeArray(CO_DELAY_MATRIX, I),                -- for each TDL in parallel we assign the delay of the corresponding column of the .txt file
+					O_DELAY		=>	From_TimeMatrix_To_TimeArray(O_DELAY_MATRIX, I),
+					----------------------------
 
-				CO_DELAY	=>	From_TimeMatrix_To_TimeArray(CO_DELAY_MATRIX, I),                -- for each TDL in parallel we assign the delay of the corresponding column of the .txt file
-				O_DELAY		=>	From_TimeMatrix_To_TimeArray(O_DELAY_MATRIX, I),
-				----------------------------
+					-------- Dimension ---------
+					NUM_TAP_TDL		=>	NUM_TAP_TDL,
+					NUM_TAP_PRE_TDL	=> NUM_TAP_PRE_TDL
+					----------------------------
 
-				-------- Dimension ---------
-				NUM_TAP_TDL		=>	NUM_TAP_TDL,
-				NUM_TAP_PRE_TDL	=> NUM_TAP_PRE_TDL
-				----------------------------
+					)
+				port map(
+					-------- Async Input --------
+					AsyncInput	=>	AsyncInput,
+					-----------------------------
 
-			)
-			port map(
-				-------- Async Input --------
-				AsyncInput	=>	AsyncInput,
-				-----------------------------
+					---- Tapped Delay-Line ------
+					CO_Taps_TDL	=>	CO_Taps_TDL(I),
+					O_Taps_TDL	=>	O_Taps_TDL(I),
+					-----------------------------
 
-				---- Tapped Delay-Line ------
-				CO_Taps_TDL	=>	CO_Taps_TDL(I),
-				O_Taps_TDL	=>	O_Taps_TDL(I),
-				-----------------------------
+					----PRE Tapped Delay-Line ------
+					CO_Taps_preTDL	=>	CO_Taps_preTDL(I),
+					O_Taps_preTDL	=>	O_Taps_preTDL(I)
+					-----------------------------
+					);
 
-				----PRE Tapped Delay-Line ------
-				CO_Taps_preTDL	=>	CO_Taps_preTDL(I),
-				O_Taps_preTDL	=>	O_Taps_preTDL(I)
-				-----------------------------
-			);
-		-----------------------------------------------
+	     			-----------------------------------------------
+		 end generate;
+
+
+		 X7S_TDL_Generation : if XUS_VS_X7S = "X7S" generate
+			Inst_TDL	:	X7S_TappedDelayLine_CARRY4
+				generic map(
+
+					-------- Sim vs Impl ---------
+					SIM_VS_IMP	=>	SIM_VS_IMP,
+
+					CO_DELAY	=>	From_TimeMatrix_To_TimeArray(CO_DELAY_MATRIX, I),                -- for each TDL in parallel we assign the delay of the corresponding column of the .txt file
+					O_DELAY		=>	From_TimeMatrix_To_TimeArray(O_DELAY_MATRIX, I),
+					----------------------------
+
+					-------- Dimension ---------
+					NUM_TAP_TDL		=>	NUM_TAP_TDL,
+					NUM_TAP_PRE_TDL	=> NUM_TAP_PRE_TDL
+					----------------------------
+
+					)
+				port map(
+					-------- Async Input --------
+					AsyncInput	=>	AsyncInput,
+					-----------------------------
+
+					---- Tapped Delay-Line ------
+					CO_Taps_TDL	=>	CO_Taps_TDL(I),
+					O_Taps_TDL	=>	O_Taps_TDL(I),
+					-----------------------------
+
+					----PRE Tapped Delay-Line ------
+					CO_Taps_preTDL	=>	CO_Taps_preTDL(I),
+					O_Taps_preTDL	=>	O_Taps_preTDL(I)
+					-----------------------------
+					);
+
+					-----------------------------------------------
+		end generate;
+
 
 		--- (Procedure) Choose TDL between CO and O ---
 		XUS_Choose_AsyncTaps_TDL (
 
 			---------------- Select Types ---------------
-			TYPE_TDL_ARRAY(I),													-- CO vs O Sampling	
+			TYPE_TDL_ARRAY(I),													-- CO vs O Sampling
 			---------------------------------------------
 
 			------------- Tapped Delay-Line --------------
-			CO_Taps_TDL(I),															-- CO Taps in output, AsyncInput delayed not inverted	
-			O_Taps_TDL(I),															-- O Taps in output, AsyncInput delayed and inverted	
+			CO_Taps_TDL(I),															-- CO Taps in output, AsyncInput delayed not inverted
+			O_Taps_TDL(I),															-- O Taps in output, AsyncInput delayed and inverted
 			----------------------------------------------
 
 			------ Async Tapped Delay-Line Input ---------
-			AsyncTaps_TDL(I)													-- Async Taps	
+			AsyncTaps_TDL(I)													-- Async Taps
 			----------------------------------------------
 
 		);
@@ -521,16 +602,16 @@ begin
 		XUS_Choose_AsyncTaps_TDL (
 
 			---------------- Select Types ---------------
-			TYPE_TDL_ARRAY(I),													-- CO vs O Sampling	
+			TYPE_TDL_ARRAY(I),													-- CO vs O Sampling
 			---------------------------------------------
 
 			------------- Tapped Delay-Line --------------
-			CO_Taps_preTDL(I),															-- CO Taps in output, AsyncInput delayed not inverted	
-			O_Taps_preTDL(I),															-- O Taps in output, AsyncInput delayed and inverted	
+			CO_Taps_preTDL(I),															-- CO Taps in output, AsyncInput delayed not inverted
+			O_Taps_preTDL(I),															-- O Taps in output, AsyncInput delayed and inverted
 			----------------------------------------------
 
 			------ Async Tapped Delay-Line Input ---------
-			AsyncTaps_preTDL(I)													-- Async Taps	
+			AsyncTaps_preTDL(I)													-- Async Taps
 			----------------------------------------------
 
 		);
@@ -639,4 +720,3 @@ begin
 
 
 end Behavioral;
-

@@ -65,8 +65,8 @@ $(function() {
 <div class="title">AXI4-Stream Virtual Tapped Delay-Line (V-TDL) </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This is a Vivado 2020.2 Project, <a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l.html" title="The entity of this module can be described by the following images:">AXI4Stream_XUS_VirtualTDL</a> is an auto configurable Virtual Tapped Delay-Line (V-TDL) for Xilinx UltraScale (XUS) based on CARRY8 primitive.</p>
-<p>The Virtual Tapped Delay-Line (V-TDL) is able to work with multiple Tapped Delay-Line (TDL) for creating a V-TDL, XUS specifies the compatibility with Xilinx UltraScale (XUS). The module is composed by a <em>NUMBER_OF_TDL</em> of TDLs in parallel, each one composed by <em>NUM_TAP_TDL</em> taps, this create a V-TDL with <em>NUMBER_OF_TDL⋅ NUM_TAP_TDL</em>. In the following figure we can see one Tapped Delay-Line, more than these TDLs in parallel creates e V-TDL. We can derive that the propagation delay of a V-TDL is, in average, <em>NUMBER_OF_TDL</em> faster than the TDL ones (<em>tp</em>) :</p>
+<div class="textblock"><p>This is a Vivado 2020.2 Project, AXI4Stream_XUS(X7S)_VirtualTDL is an auto configurable Virtual Tapped Delay-Line (V-TDL) for Xilinx UltraScale or 7-Series based on CARRY8 or CARRY4 primitive.</p>
+<p>The Virtual Tapped Delay-Line (V-TDL) is able to work with multiple Tapped Delay-Line (TDL) for creating a V-TDL, XUS specifies the compatibility with Xilinx UltraScale, while X7S specifies the compatibility with Xilinx 7-Series. The module is composed by a <em>NUMBER_OF_TDL</em> of TDLs in parallel, each one composed by <em>NUM_TAP_TDL</em> taps, this create a V-TDL with <em>NUMBER_OF_TDL⋅ NUM_TAP_TDL</em>. In the following figure we can see one Tapped Delay-Line, more than these TDLs in parallel creates e V-TDL. We can derive that the propagation delay of a V-TDL is, in average, <em>NUMBER_OF_TDL</em> faster than the TDL ones (<em>tp</em>) :</p>
 <div class="image">
 <object type="image/svg+xml" data="TDL_Propagation_Scheme.svg" style="pointer-events: none;"></object>
 <div class="caption">
@@ -83,11 +83,8 @@ CARRY8 Image</div></div>
 BIT_SMP Image</div></div>
    <p>The previous figure explains the case of <em>NUM_TAP_TDL = 10</em> and <em>BIT_SMP_TDL = 5</em> with <em>OFFSET_TAP_TDL = 0</em> (in the image on top) and <em>OFFSET_TAP_TDL = 1</em> (in the image on the bottom). So basically we sample 1 tap out of 2. How the sampling is managed, will be explained later in the documentation of the <em><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a></em>.</p>
 <p>Furthermore, in reality we have a PRE-TDL before the real TDL Carry Chain that performs effectively the measurement. This PRE-TDL is composed by <em>NUM_TAP_PRE_TDL</em> taps and we sample just <em>BIT_SMP_PRE_TDL</em> taps. This PRE-TDL is not used for measuring the incoming signal, but it is used just to anticipate the acquisition of the valid before the acquisition of the <em>AsyncInput</em> signal. We can see in the following figure a graphical explanation of this:</p>
-<div class="image">
-<img src="PRE-TDL.png" alt=""/>
-<div class="caption">
-PRE-TDL Image</div></div>
-   <p>We see in the picture that we have a PRE-TDL composed by <em>NUM_TAP_PRE_TDL</em> taps and a TDL composed by <em>NUM_TAP_TDL</em> taps, but only the <em>BIT_SMP_TDL</em> taps of the TDL are then brought in output. The <em>BIT_SMP_PRE_TDL</em> together with the <em>BIT_SMP_TDL</em> taps of the V-TDL are just used to select the valid, in order to get the valid before the TDL can acquire the signal, in such a way that by changing the position of the valid that we choose, we can move rightwards (if we choose the valid at the last taps of the TDL) or leftwards (if we choose the valid at the taps of the PRE-TDL, by setting a negative MIN_VALID_TAP_POS ) the characteristic curve and the calibration table of the TDC.</p>
+<p><img src="doc/img/PRE-TDL.png" alt="PRE-TDL Image" class="inline"/></p>
+<p>We see in the picture that we have a PRE-TDL composed by <em>NUM_TAP_PRE_TDL</em> taps and a TDL composed by <em>NUM_TAP_TDL</em> taps, but only the <em>BIT_SMP_TDL</em> taps of the TDL are then brought in output. The <em>BIT_SMP_PRE_TDL</em> together with the <em>BIT_SMP_TDL</em> taps of the V-TDL are just used to select the valid, in order to get the valid before the TDL can acquire the signal, in such a way that by changing the position of the valid that we choose, we can move rightwards (if we choose the valid at the last taps of the TDL) or leftwards (if we choose the valid at the taps of the PRE-TDL, by setting a negative MIN_VALID_TAP_POS ) the characteristic curve and the calibration table of the TDC.</p>
 <p>Then given in input of the TDLs the asynchronous signal <em>AsyncInput</em>, in output we have a sampled version of <em>AsyncInput</em>. Basically the series of flip-flops present along the chain samples the incoming signal. In this way a thermometric code in output is generated (<em>m00_axis_undeco_tdata</em>). We can notice that the output data (<em>m00_axis_undeco_tdata</em>) has a length that is a multiple of 8 and it is in AXI4Stream. In addition to <em>BIT_SMP_TDL</em>, the sampling is managed also by <em>TYPE_TDL_i</em> and by <em>OFFSET_TAP_TDL_i</em> (i is a value between 0 and 15). Indeed by means of <em>TYPE_TDL_i</em> we choose which taps of the <em>CARRY8</em> primitive we want to look at (<em>CO</em> taps or <em>O</em> taps) for the i-th TDL. Instead by means of <em>OFFSET_TAP_TDL_i</em> we can set an initial offset in the sampling chains, which means that the first flip-flop of the i-th TDL is not put in the first position of the chain, but after an <em>OFFSET_TAP_TDL_i</em> number of positions. We can see the concept of offset in the following figure:</p>
 <div class="image">
 <img src="OFFSET.png" alt=""/>
@@ -113,13 +110,11 @@ Buffering Image</div></div>
    <h1><a class="anchor" id="autotoc_md1"></a>
 IP-Core</h1>
 <p>Wrapping of <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> for AXI4-Stream interface for IP-Core.</p>
-<div class="image">
-<img src="TappedDelayLine_IP-Core.png" alt=""/>
-<div class="caption">
-IP-Core Image</div></div>
-   <h2><a class="anchor" id="autotoc_md2"></a>
+<p><img src="doc/img/TappedDelayLine_IP-Core.png" alt="IP-Core Image" class="inline"/></p>
+<h2><a class="anchor" id="autotoc_md2"></a>
 Generic</h2>
 <ul>
+<li><b>XUS_VS_X7S</b>: Compatibility with UltraScale or 7-Series, <em>STRING</em> type.</li>
 <li><b>TYPE_TDL_i</b>: CO vs O Sampling TDL, with i in [0; <em>NUMBER_OF_TDL</em> -1], <em>STRING</em> type, default <b>C</b>.</li>
 <li><b>DEBUG_MODE</b>: True Active the AXI port for moving the Valid Position (Sampled Tap used) and valid Number (TDL used). It allows us to choose the valid by port if it TRUE, <em>BOOLEAN</em> type.</li>
 <li><b>SIM_VS_IMP</b>: Simulation or Implementation, <em>STRING</em> type.</li>
@@ -153,11 +148,8 @@ Port</h2>
 <li><b>ValidPositionTap</b>: Position of the bit for generating the valid of Bit of <em>SampledTaps_TDL</em>, <em>STD_LOGIC_VECTOR(31 DOWNTO 0)</em> type.</li>
 <li><b>ValidNumberOfTdl</b>: Valid chosen between the <em>NUMBER_OF_TDL</em> possible TDLs, <em>STD_LOGIC_VECTOR(31 DOWNTO 0)</em> type.</li>
 </ul>
-<div class="image">
-<img src="TappedDelayLine_Signals.png" alt=""/>
-<div class="caption">
-Signals Image</div></div>
-   <p>This module instantiates the <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> and renames the input and the output interfaces with AXI4Stream, input as slave output as master.</p>
+<p><img src="doc/img/TappedDelayLine_Signals.png" alt="Signals Image" class="inline"/></p>
+<p>This module instantiates the <em><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a></em> and renames the input and the output interfaces with AXI4Stream, input as slave output as master.</p>
 <h1><a class="anchor" id="autotoc_md4"></a>
 Sources</h1>
 <p>We can find the following module in <em>hdl/</em>:</p>
@@ -166,6 +158,7 @@ Sources</h1>
 <li><b><a class="el" href="class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu...">AXI4Stream_XUS_VirtualTDLWrapper</a> (TDL)</b>: Wrapping between TDLs and Sampler with axi4 stream output.</li>
 <li><b><a class="el" href="class_sampler___t_d_l.html" title="Given in input all the Taps of the TDL AsyncTaps_TDL the module samples just a BIT_SMP_TDL + BIT_SMP_...">Sampler_TDL</a> (TDL)</b>: Sampling the TDL, with the possibility to decimate the TAPs, and define the valid all syncronized to the input clock.</li>
 <li><b><a class="el" href="class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">XUS_TappedDelayLine_CARRY8</a> (TDL)</b>: Simple TDL implemented using the CARRY8 primitive for Xilinx UltraScale.</li>
+<li><b><a class="el" href="class_x7_s___tapped_delay_line___c_a_r_r_y4.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ...">X7S_TappedDelayLine_CARRY4</a> (TDL)</b>: Simple TDL implemented using the CARRY4 primitive for Xilinx 7-Series.</li>
 <li><b><a class="el" href="class_local_package___t_d_l.html">LocalPackage_TDL</a> (TDL)</b>: Functions for autoconfigurable all the VHDL file.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md5"></a>

@@ -103,6 +103,8 @@ library work;
 entity AXI4Stream_XUS_VirtualTDL is
 
 	generic (
+        ------------- Select Technology node of the Tapped Delay-Line
+        XUS_VS_X7S          :   XUS_VS_X7S_STRING  := "XUS";
 
 		------------- Select Types of Edge of the Tapped Delay-Line ------------
 		TYPE_TDL_0		:	STRING	:= "C";															--! CO vs O Sampling TDL #1
@@ -138,11 +140,11 @@ entity AXI4Stream_XUS_VirtualTDL is
 
 		------ Simulation Delay ----
 		FILE_PATH_NAME_CO_DELAY		:	STRING	:=													--! Path of the .txt file that contains the CO delays for Simulation
-		
+
 		"/home/mconsonni/Utility_Ip_Core/ip-repo/AXI4-Stream_XUS_VirtualTDL/src/CO_Delay.txt";
 
 		FILE_PATH_NAME_O_DELAY		:	STRING	:=													--! Path of the .txt file that contains the O delays for Simulation
-		
+
 		"/home/mconsonni/Utility_Ip_Core/ip-repo/AXI4-Stream_XUS_VirtualTDL/src/O_Delay.txt";
 		----------------------------
 
@@ -321,6 +323,7 @@ architecture Behavioral of AXI4Stream_XUS_VirtualTDL is
 
 		generic (
 
+			XUS_VS_X7S          :   XUS_VS_X7S_STRING  := "XUS";
 			------------- Select Types of Edge of the Tapped Delay-Line ------------
 			TYPE_TDL_ARRAY		:	CO_VS_O_ARRAY_STRING	:= ("C", "O", Others => "C");				-- CO vs O Sampling
 			------------------------------------------------------------------------
@@ -449,6 +452,7 @@ begin
 	Inst_AXI4Stream_XUS_VirtualTDLWrapper	:	AXI4Stream_XUS_VirtualTDLWrapper
 
 		generic map(
+            XUS_VS_X7S  => XUS_VS_X7S,
 
 			------------- Select Types of Edge of the Tapped Delay-Line ------------
 			TYPE_TDL_ARRAY		=>	TYPE_TDL_ARRAY,

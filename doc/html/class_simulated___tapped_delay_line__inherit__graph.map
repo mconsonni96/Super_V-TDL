@@ -1,7 +1,8 @@
 <map id="Simulated_TappedDelayLine" name="Simulated_TappedDelayLine">
-<area shape="rect" id="node1" title="Being a module used just in simulation phase, we need to have CO_DELAY and O_DELAY that are the value..." alt="" coords="121,5,327,32"/>
-<area shape="rect" id="node2" href="$class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ..." alt="" coords="141,80,307,121"/>
-<area shape="rect" id="node3" href="$class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu..." alt="" coords="93,169,355,196"/>
-<area shape="rect" id="node4" href="$class_a_x_i4_stream___x_u_s___virtual_t_d_l.html" title="The entity of this module can be described by the following images:" alt="" coords="5,251,213,278"/>
-<area shape="rect" id="node5" href="$classtb___a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title=" " alt="" coords="237,244,440,285"/>
+<area shape="rect" id="node1" title="Being a module used just in simulation phase, we need to have CO_DELAY and O_DELAY that are the value..." alt="" coords="120,5,307,32"/>
+<area shape="rect" id="node2" href="$class_x7_s___tapped_delay_line___c_a_r_r_y4.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ..." alt="" coords="47,80,201,121"/>
+<area shape="rect" id="node6" href="$class_x_u_s___tapped_delay_line___c_a_r_r_y8.html" title="In this module the structure of the overall TDL in both cases of SIM_VS_IMP = &quot;IMP&quot; and SIM_VS_IMP = ..." alt="" coords="225,80,383,121"/>
+<area shape="rect" id="node3" href="$class_a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title="This module basically manages the creation of a NUMBER_OF_TDL TDLs in parallel, with a NUM_TAP_TDL nu..." alt="" coords="91,169,336,196"/>
+<area shape="rect" id="node4" href="$class_a_x_i4_stream___x_u_s___virtual_t_d_l.html" title="The entity of this module can be described by the following images:" alt="" coords="5,251,203,278"/>
+<area shape="rect" id="node5" href="$classtb___a_x_i4_stream___x_u_s___virtual_t_d_l_wrapper.html" title=" " alt="" coords="227,244,418,285"/>
 </map>

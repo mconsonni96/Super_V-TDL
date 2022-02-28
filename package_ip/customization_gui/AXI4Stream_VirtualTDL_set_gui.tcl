@@ -1185,6 +1185,22 @@ proc update_MODELPARAM_VALUE.SIM_VS_IMP { MODELPARAM_VALUE.SIM_VS_IMP PARAM_VALU
 }
 # ------------------------------------------------------------------------------
 
+# --------------------------------- XUS_VS_X7S ---------------------------------
+proc update_PARAM_VALUE.XUS_VS_X7S { PARAM_VALUE.XUS_VS_X7S } {
+	# Procedure called to update XUS_VS_X7S when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.XUS_VS_X7S { PARAM_VALUE.XUS_VS_X7S } {
+	# Procedure called to validate XUS_VS_X7S
+	return true
+}
+
+proc update_MODELPARAM_VALUE.XUS_VS_X7S { MODELPARAM_VALUE.XUS_VS_X7S PARAM_VALUE.XUS_VS_X7S } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.XUS_VS_X7S}] ${MODELPARAM_VALUE.XUS_VS_X7S}
+}
+# ------------------------------------------------------------------------------
+
 # ---------------------------- VALID_NUMBER_OF_TDL_INIT ------------------------
 proc update_PARAM_VALUE.VALID_NUMBER_OF_TDL_INIT { PARAM_VALUE.VALID_NUMBER_OF_TDL_INIT PARAM_VALUE.NUMBER_OF_TDL} {
 	# Procedure called to update VALID_NUMBER_OF_TDL_INIT when any of the dependent parameters in the arguments change

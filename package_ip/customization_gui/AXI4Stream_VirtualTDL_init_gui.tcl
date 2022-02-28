@@ -4,6 +4,8 @@ proc init_TDL_gui { IPINST Page} {
 
   #Adding Page
   set Page_0 [ipgui::add_page $IPINST -name $Page]
+  set XUS_VS_X7S [ipgui::add_param $IPINST -name "XUS_VS_X7S" -parent ${Page_0} -widget comboBox]
+  set_property tooltip {Use TDL for Xilinx UltraScale or Xilinx 7-Series} ${XUS_VS_X7S}
   set BUFFERING_STAGE [ipgui::add_param $IPINST -name "BUFFERING_STAGE" -parent ${Page_0}]
   set_property tooltip {Insertion of a further buffering stage between TDL and decoder for bufferazing the generation of the valid} ${BUFFERING_STAGE}
   set DEBUG_MODE [ipgui::add_param $IPINST -name "DEBUG_MODE" -parent ${Page_0}]
