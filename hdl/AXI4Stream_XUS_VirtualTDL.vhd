@@ -323,7 +323,7 @@ architecture Behavioral of AXI4Stream_XUS_VirtualTDL is
 
 		generic (
 
-			XUS_VS_X7S          :   XUS_VS_X7S_STRING  := "XUS";
+			XUS_VS_X7S          :   STRING  := "XUS";
 			------------- Select Types of Edge of the Tapped Delay-Line ------------
 			TYPE_TDL_ARRAY		:	CO_VS_O_ARRAY_STRING	:= ("C", "O", Others => "C");				-- CO vs O Sampling
 			------------------------------------------------------------------------
